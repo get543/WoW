@@ -1,105 +1,35 @@
-// const { clientId, guildId, token, publicKey } = require('./config.json');
 require("dotenv").config();
-const APPLICATION_ID = process.env.APPLICATION_ID;
-const TOKEN = process.env.TOKEN;
-const PUBLIC_KEY = process.env.PUBLIC_KEY || "not set";
-const GUILD_ID = process.env.GUILD_ID;
+const fs = require("fs");
+const Discord = require("discord.js");
 
-const axios = require("axios");
-const express = require("express");
-const {
-  InteractionType,
-  InteractionResponseType,
-  verifyKeyMiddleware,
-} = require("discord-interactions");
-
-const app = express();
-// app.use(bodyParser.json());
-
-const discord_api = axios.create({
-  baseURL: "https://discord.com/api/",
-  timeout: 3000,
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
-    "Access-Control-Allow-Headers": "Authorization",
-    Authorization: `Bot ${TOKEN}`,
-  },
+const client = new Discord.Client({
+  intents: [
+    Discord.GatewayIntentBits.Guilds,
+    Discord.GatewayIntentBits.GuildMessages,
+    Discord.GatewayIntentBits.GuildVoiceStates,
+    Discord.GatewayIntentBits.MessageContent,
+    // Discord.GatewayIntentBits.MessageReactions,
+  ],
 });
 
-app.post("/interactions", verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
-  const interaction = req.body;
+client.commands = new Discord.Collection();
+client.buttons = new Discord.Collection();
+client.commandArray = [];
 
-  if (interaction.type === InteractionType.APPLICATION_COMMAND) {
-    console.log(interaction.data.name);
-    if (interaction.data.name == "yo") {
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          content: `Yo ${interaction.member.user.username}!`,
-        },
-      });
-    }
+const handlers = fs
+  .readdirSync("./handlers")
+  .filter((file) => file.endsWith(".js"));
+const eventFolders = fs.readdirSync("./events");
+const commandFolders = fs.readdirSync("./commands");
+const componentFolders = fs.readdirSync(`./components`);
 
-    if (interaction.data.name == "dm") {
-      // https://discord.com/developers/docs/resources/user#create-dm
-      let c = (
-        await discord_api.post(`/users/@me/channels`, {
-          recipient_id: interaction.member.user.id,
-        })
-      ).data;
-      try {
-        // https://discord.com/developers/docs/resources/channel#create-message
-        let res = await discord_api.post(`/channels/${c.id}/messages`, {
-          content:
-            "Yo! I got your slash command. I am not able to respond to DMs just slash commands.",
-        });
-        console.log(res.data);
-      } catch (e) {
-        console.log(e);
-      }
-
-      return res.send({
-        // https://discord.com/developers/docs/interactions/receiving-and-responding#responding-to-an-interaction
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          content: "👍",
-        },
-      });
-    }
+(async () => {
+  for (const file of handlers) {
+    require(`./handlers/${file}`)(client);
   }
-});
 
-app.get("/register_commands", async (req, res) => {
-  let slash_commands = [
-    {
-      name: "yo",
-      description: "replies with Yo!",
-      options: [],
-    },
-    {
-      name: "dm",
-      description: "sends user a DM",
-      options: [],
-    },
-  ];
-  try {
-    // api docs - https://discord.com/developers/docs/interactions/application-commands#create-global-application-command
-    let discord_response = await discord_api.put(
-      `/applications/${APPLICATION_ID}/guilds/${GUILD_ID}/commands`,
-      slash_commands
-    );
-    console.log(discord_response.data);
-    return res.send("commands have been registered");
-  } catch (e) {
-    console.error(e.code);
-    console.error(e.response?.data);
-    return res.send(`${e.code} error from discord`);
-  }
-});
-
-app.get("/", async (req, res) => {
-  return res.send("Follow documentation ");
-});
-
-app.listen(8999, () => {});
+  client.handleEvents(eventFolders, "./events");
+  client.handleCommands(commandFolders, "./commands");
+  client.handleComponents(componentFolders, "./components");
+  client.login(process.env.DISCORD_TOKEN);
+})();
