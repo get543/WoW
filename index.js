@@ -1,3 +1,4 @@
+const keepAlive = require("./server");
 require("dotenv").config();
 const fs = require("fs");
 const Discord = require("discord.js");
@@ -33,3 +34,5 @@ const componentFolders = fs.readdirSync(`./components`);
   client.handleComponents(componentFolders, "./components");
   client.login(process.env.DISCORD_TOKEN);
 })();
+
+keepAlive();
