@@ -8,7 +8,7 @@ module.exports = {
     const embed = new Discord.EmbedBuilder()
       .setTitle(`🖥 ***Server Info***`)
       .setThumbnail(interaction.guild.iconURL())
-      .setColor("#804000")
+      .setColor(0x804000)
       .addFields([
         { name: "Server Name", value: interaction.guild.name },
         { name: "Total Members", value: `${interaction.guild.memberCount}` },

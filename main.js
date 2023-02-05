@@ -17,9 +17,7 @@ client.commands = new Discord.Collection();
 client.buttons = new Discord.Collection();
 client.commandArray = [];
 
-const handlers = fs
-  .readdirSync("./handlers")
-  .filter((file) => file.endsWith(".js"));
+const handlers = fs.readdirSync("./handlers").filter((file) => file.endsWith(".js"));
 const eventFolders = fs.readdirSync("./events");
 const commandFolders = fs.readdirSync("./commands");
 const componentFolders = fs.readdirSync(`./components`);

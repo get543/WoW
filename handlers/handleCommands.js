@@ -18,23 +18,15 @@ module.exports = (client) => {
       }
     }
 
-    const rest = new REST({ version: "10" }).setToken(
-      process.env.DISCORD_TOKEN
-    );
+    const rest = new REST({ version: "10" }).setToken(process.env.DISCORD_TOKEN);
 
     (async () => {
       try {
         console.log("Loading application (/) commands.");
 
-        await rest.put(
-          Routes.applicationGuildCommands(
-            process.env.clientID,
-            process.env.guildID
-          ),
-          {
-            body: client.commandArray,
-          }
-        );
+        await rest.put(Routes.applicationGuildCommands(process.env.clientID, process.env.guildID), {
+          body: client.commandArray,
+        });
 
         console.log("Successfully reloaded application (/) commands.");
       } catch (error) {

@@ -1,5 +1,4 @@
-const fetch = (...args) =>
-  import("node-fetch").then(({ default: fetch }) => fetch(...args));
+const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args));
 const Discord = require("discord.js");
 
 module.exports = {
@@ -21,7 +20,7 @@ module.exports = {
       const gif = json.results[index].media_formats.gif.url;
 
       const gifEmbed = new Discord.EmbedBuilder()
-        .setColor("BROWN")
+        .setColor(0x814721)
         .setImage(gif)
         .setTitle(`SNIPE 🔫 😁`);
 

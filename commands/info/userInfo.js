@@ -8,7 +8,7 @@ module.exports = {
     const embed = new Discord.EmbedBuilder()
       .setTitle(`🙂 ***User Info***`)
       .setThumbnail(interaction.user.displayAvatarURL())
-      .setColor("#804000")
+      .setColor(0x804000)
       .addFields([
         { name: "Username", value: interaction.user.username },
         { name: "Tag", value: interaction.user.tag },

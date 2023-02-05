@@ -1,5 +1,4 @@
-const fetch = (...args) =>
-  import("node-fetch").then(({ default: fetch }) => fetch(...args));
+const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args));
 const Discord = require("discord.js");
 
 // GIF Function
@@ -11,10 +10,7 @@ async function TenorAPI(interaction, keywords, gifTitle, embedColor) {
   const index = Math.floor(Math.random() * json.results.length);
   const gif = json.results[index].media_formats.gif.url;
 
-  const embed = new Discord.EmbedBuilder()
-    .setTitle(gifTitle)
-    .setColor(embedColor)
-    .setImage(gif);
+  const embed = new Discord.EmbedBuilder().setTitle(gifTitle).setColor(embedColor).setImage(gif);
   return interaction.reply({ embeds: [embed] });
 }
 
@@ -35,26 +31,20 @@ module.exports = {
         )
     )
     .addStringOption((option) =>
-      option
-        .setName("keywords")
-        .setDescription("The gif that you want to search")
+      option.setName("keywords").setDescription("The gif that you want to search")
     ),
   async execute(interaction) {
     if (interaction.options.getString("category") === "gif_funny") {
       if (!interaction.options.getString("keywords")) {
         const keywords = "funny gif";
         const title = "That's some funny shit";
-        const color = "DarkPurple";
+        const color = 0x9b7cb6;
 
         TenorAPI(interaction, keywords, title, color);
       } else {
-        const keywords =
-          "funny gif " + interaction.options.getString("keywords");
-        const title =
-          "Yeah, that's a funny " +
-          interaction.options.getString("keywords") +
-          " GIF";
-        const color = "DarkPurple";
+        const keywords = "funny gif " + interaction.options.getString("keywords");
+        const title = "Yeah, that's a funny " + interaction.options.getString("keywords") + " GIF";
+        const color = 0x9b7cb6;
 
         TenorAPI(interaction, keywords, title, color);
       }
@@ -62,16 +52,14 @@ module.exports = {
       if (!interaction.options.getString("keywords")) {
         const keywords = "meme";
         const title = "Meme GIF";
-        const color = "Blurple";
+        const color = 0x638afd;
 
         TenorAPI(interaction, keywords, title, color);
       } else {
         const keywords = "meme " + interaction.options.getString("keywords");
         const title =
-          "Here is some random " +
-          interaction.options.getString("keywords") +
-          " meme GIF";
-        const color = "Blurple";
+          "Here is some random " + interaction.options.getString("keywords") + " meme GIF";
+        const color = 0x638afd;
 
         TenorAPI(interaction, keywords, title, color);
       }
@@ -79,14 +67,13 @@ module.exports = {
       if (!interaction.options.getString("keywords")) {
         const keywords = "gif about movie";
         const title = "Movie GIF";
-        const color = "DarkVividPink";
+        const color = 0xb6007a;
 
         TenorAPI(interaction, keywords, title, color);
       } else {
-        const keywords =
-          "gif about movie " + interaction.options.getString("keywords");
+        const keywords = "gif about movie " + interaction.options.getString("keywords");
         const title = interaction.options.getString("keywords") + " movie GIF";
-        const color = "DarkVividPink";
+        const color = 0xb6007a;
 
         TenorAPI(interaction, keywords, title, color);
       }
@@ -96,7 +83,7 @@ module.exports = {
       } else {
         const keywords = interaction.options.getString("keywords");
         const title = `Search for ${keywords} GIF`;
-        const color = "DarkAqua";
+        const color = 0x003c5d;
 
         TenorAPI(interaction, keywords, title, color);
       }

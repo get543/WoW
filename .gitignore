@@ -1,3 +1,6 @@
+# package
+package-lock.json
+
 # Logs
 logs
 *.log
@@ -40,7 +43,6 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
-package-lock.json
 
 # TypeScript v1 declaration files
 typings/
@@ -53,7 +55,6 @@ typings/
 
 # Optional eslint cache
 .eslintcache
-.eslintrc.json
 
 # Microbundle cache
 .rpt2_cache/
@@ -73,6 +74,7 @@ typings/
 # dotenv environment variables file
 .env
 .env.test
+env-backup.txt
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
