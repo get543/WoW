@@ -7,9 +7,8 @@ const client = new Discord.Client({
   intents: [
     Discord.GatewayIntentBits.Guilds,
     Discord.GatewayIntentBits.GuildMessages,
-    Discord.GatewayIntentBits.GuildVoiceStates,
+    Discord.GatewayIntentBits.GuildMessageReactions,
     Discord.GatewayIntentBits.MessageContent,
-    // Discord.GatewayIntentBits.MessageReactions,
   ],
 });
 
