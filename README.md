@@ -4,7 +4,9 @@
 
 # WoW
 
-Simple Discord Bot Created Using [discord.js](https://discord.js.org). Supports slash (/) commands. Using the newest technology available.
+Simple Discord Bot Created Using [discord.js](https://discord.js.org).
+Supports slash (/) commands.
+Using the newest technology available.
 
 # Getting Started
 
