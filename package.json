@@ -1,25 +1,31 @@
 {
-  "name": "wow-bot",
+  "name": "wow",
   "version": "3.0.0",
   "description": "Trying to use the newest technology of discord.js",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node .",
+    "delete": "node delete/guild.js",
     "format": "prettier --write .",
     "lint": "eslint ./"
   },
   "author": "U pil and U din",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^14.7.1",
+    "discord.js": "^14.8.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
-    "node-fetch": "^3.2.9"
+    "node-fetch": "^3.3.1"
   },
   "devDependencies": {
-    "eslint": "^8.24.0",
-    "prettier": "^2.8.3"
-  }
+    "eslint": "^8.36.0",
+    "prettier": "^2.8.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/get543/WoW.git"
+  },
+  "homepage": "https://github.com/get543/WoW#readme"
 }
