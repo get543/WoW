@@ -29,7 +29,7 @@ module.exports = {
       )
       .setColor(0xff0000)
       .addFields([
-        { name: "/add", value: "pong" },
+        { name: "/add", value: "add two numbers" },
         { name: "/ping", value: "pong" },
         { name: "/server", value: "display more info about the server" },
         { name: "/user", value: "display more info about the user" },
