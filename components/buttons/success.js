@@ -1,10 +1,10 @@
 module.exports = {
   data: {
-    name: `success`,
+    name: "success",
   },
   async execute(interaction) {
     await interaction.reply({
-      content: `Green Light`,
+      content: "Green Light.",
     });
   },
 };

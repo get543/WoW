@@ -1,10 +1,10 @@
 module.exports = {
   data: {
-    name: `danger`,
+    name: "danger",
   },
   async execute(interaction) {
     await interaction.reply({
-      content: `idk man`,
+      content: "This is a danger button.",
     });
   },
 };

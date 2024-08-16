@@ -1,10 +1,10 @@
 module.exports = {
   data: {
-    name: `testing`,
+    name: "testing",
   },
   async execute(interaction) {
     await interaction.reply({
-      content: `This is just a test hahaha`,
+      content: "This is just a test hahaha",
     });
   },
 };
